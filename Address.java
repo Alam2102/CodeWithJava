@@ -1,0 +1,40 @@
+package com.test;
+
+public class Address implements Comparable<Address> {
+
+	private String streetName;
+	private int pinCode;
+
+	public Address(String streetName, int pinCode) {
+		super();
+		this.streetName = streetName;
+		this.pinCode = pinCode;
+	}
+
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+
+	public int getPinCode() {
+		return pinCode;
+	}
+
+	public void setPinCode(int pinCode) {
+		this.pinCode = pinCode;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [streetName=" + streetName + ", pinCode=" + pinCode + "]";
+	}
+
+	@Override
+	public int compareTo(Address add) {
+		return this.getPinCode() - add.getPinCode();
+	}
+
+}
