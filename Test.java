@@ -1,24 +1,32 @@
-package com.example.demo;
+package com.test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Test {
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 	public static void main(String[] args) {
-		List<Integer> withDupes = Arrays.asList(10, 10, 20, 20, 30, 30, 40, 50);
-		List<Integer> withOutDub = withDupes.stream().distinct().collect(Collectors.toList());
-		System.out.println(withOutDub);
+		Test t1 = new Test();
+		Test t2 = new Test();
+		Map<Test, String> map = new HashMap<>();
+		map.put(t1, "t1");
+		map.put(t2, "t2");
+		System.out.println(map.size());
+		System.out.println(map.get(t1));
+		System.out.println(map.get(t2));
 
-		String org = "noor";
-		String withOutDub1 = Arrays.asList(org.split("")).stream().distinct().collect(Collectors.joining());
-		System.out.println(withOutDub1);
-
-		String[] array = { "Meta", "Apple", "Amazon", "Netflix", "Apple", // duplicate
-				"Google", "Netflix" // duplicate
-		};
-		Object[] array1 = Arrays.stream(array).distinct().toArray();
-		Arrays.stream(array1).forEach(System.out::println);
 	}
 
 }
