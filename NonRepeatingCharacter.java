@@ -1,34 +1,62 @@
 package com.test;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
 
 public class NonRepeatingCharacter {
 	public static void main(String[] args) {
-		String str = "AAAABBBBBBCCDEEFFFFFGGGHHH";
+		Character c = getNONRepeatingCharacter("SASAS");
+		// System.out.println("Non Reapeting character is : " + c.toString());
 
-		int len = str.length();
-		HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
-		for (int i = 0; i < len; i++) {
+		Optional<Character> cOptional = getNONRepeatingCharacterOptional("SASAS");
+		if (cOptional.isPresent()) {
+			System.out.println("Non Reapeting character is : " + cOptional.toString());
+
+		} else {
+			System.out.println("No non repeated character found in String");
+		}
+	}
+
+	// without using Optional class to avoid nullpointerException
+	public static Character getNONRepeatingCharacter(String str) {
+		Map<Character, Integer> hm = new LinkedHashMap<>();
+		for (int i = 0; i < str.length() - 1; i++) {
 			Character ch = str.charAt(i);
-			if (hm.get(ch) != null) {
-				hm.put(ch, hm.get(ch) + 1);
-			} else {
+			if (!hm.containsKey(ch)) {
 				hm.put(ch, 1);
+			} else {
+				hm.put(ch, hm.get(ch) + 1);
 			}
-			System.out.println(hm);
-			
 		}
 
-		//HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
+		for (Entry<Character, Integer> e : hm.entrySet()) {
+			if (e.getValue() == 1)
+				return e.getKey();
 
-		for (int i = 0; i < str.length(); i++) {
+		}
+		return null;
+	}
+
+	// with the use Optional class to avoid NullpointerException
+	public static Optional<Character> getNONRepeatingCharacterOptional(String str) {
+		Map<Character, Integer> hm = new LinkedHashMap<>();
+		for (int i = 0; i < str.length() - 1; i++) {
 			Character ch = str.charAt(i);
-			if (hm.get(ch) == 1) {
-
-				//System.out.println("First non-repeating character=" + ch);
+			if (!hm.containsKey(ch)) {
+				hm.put(ch, 1);
+			} else {
+				hm.put(ch, hm.get(ch) + 1);
 			}
 		}
 
+		for (Entry<Character, Integer> e : hm.entrySet()) {
+			if (e.getValue() == 1)
+				return Optional.of(e.getKey());
+
+		}
+		return Optional.ofNullable(null);
 	}
 
 }
